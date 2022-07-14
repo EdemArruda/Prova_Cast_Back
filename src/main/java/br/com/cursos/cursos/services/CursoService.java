@@ -37,6 +37,7 @@ public class CursoService {
 		LOGGER.info("Mensagem de log: curso cadastrado com sucesso");
 		validaData(curso);
 		validacao(curso);
+		ValidaPorNome(curso);
 		cursoRepository.save(curso);
 	}
 
@@ -44,6 +45,7 @@ public class CursoService {
 	public void atualizar(Curso IdCurso) {
 		validacaoEdita(IdCurso);
 		validaData(IdCurso);
+		ValidaPorNome(IdCurso);
 		LOGGER.info("Mensagem de log: curso atualizado com sucesso");
 		cursoRepository.save(IdCurso);
 	}
@@ -92,6 +94,15 @@ public class CursoService {
 		}
 		cursoRepository.deleteById(IdCurso);
 	}
+	public void ValidaPorNome(Curso curso) {
+
+        for (Curso aux : cursoRepository.findAll()) {
+            if (aux.getDescricao().equals(curso.getDescricao())) {
+                throw new RuntimeException("Este curso já existe.");
+            }
+        }
+
+    }
 
 	public List<Curso> consultar(String descricao, LocalDate dataAbertura, LocalDate dataFechamento) {
 		System.out.println(dataAbertura);

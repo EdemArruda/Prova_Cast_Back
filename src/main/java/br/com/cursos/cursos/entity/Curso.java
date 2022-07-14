@@ -3,6 +3,7 @@ package br.com.cursos.cursos.entity;
 
 import java.io.Serializable;
 
+
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -16,12 +17,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import org.hibernate.envers.Audited;
 
-@Audited
+
+
 @Entity
 @Table(name = "cursos")
-public class Curso implements Serializable {
+public class Curso extends Log implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
